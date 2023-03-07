@@ -14,14 +14,25 @@ const cors = require("cors");
 //   //ssl: true
 // };
 
+// const config = {
+//   host: 'virtualrehabilitationcs-server.postgres.database.azure.com',
+//   port: 5432,
+//   database: 'virtualrehabilitationcs-database',
+//   user: 'mooyhjmirm',
+//   password: 'Z1TQ2B8I5NGMZQI0$',
+//   ssl: true
+// }
+
+
 const config = {
-  host: 'virtualrehabilitationcs-server.postgres.database.azure.com',
+  host: 'nathan-database.postgres.database.azure.com',
   port: 5432,
-  database: 'virtualrehabilitationcs-database',
-  user: 'mooyhjmirm',
-  password: 'Z1TQ2B8I5NGMZQI0$',
+  database: 'postgres',
+  user: 'nathanadminname',
+  password: '1GE!mangguo!',
   ssl: true
 }
+
 
 const app = express();
 const PORT = process.env.PORT || 4000;
