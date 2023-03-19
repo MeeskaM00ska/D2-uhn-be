@@ -32,6 +32,9 @@ const popRouter = require('./routes/pop_up')
 app.use("/", popRouter)
 
 
+app.get('/hello', (req, res) => {
+  res.send('hello')
+})
 
 server.listen(port,  () => {
   console.log(`Server listening at http://localhost:${port}`);
