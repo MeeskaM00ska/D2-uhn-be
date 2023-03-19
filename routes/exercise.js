@@ -1,4 +1,5 @@
 const express = require('express');
+const axios = require('axios');
 const router = express.Router();
 const { pool } = require('../dbConfig');
 const ver_tools = require('../tools/verifiers');
@@ -61,7 +62,7 @@ router.post('/complete_exercise', (req, res) => {
 
     const query = `INSERT INTO CompletedExercise(PatientID, Exercise, Character, Number_Sets, Number_Repetitions, Date, Time)
                 VALUES ($1, $2, $3, $4, $5, $6, $7)`;
-    pool.query(query, [pid, exercise, character, number_sets, number_repetitions, date, time], (err, result) => {
+    pool.query(query, [pid, exercise, character, number_sets, number_repetitions, date, date+' '+time], (err, result) => {
         if (err) {
             console.error(err);
             return res.status(500).send("Error inserting data into CompletedExercise table.");
@@ -69,7 +70,42 @@ router.post('/complete_exercise', (req, res) => {
         return res.status(200).send("Data inserted successfully into CompletedExercise table.");
     });
 });
+router.get('/avatar_provider',(req,res)=>{
+    //const pid = ver_tools.login_ver(req.headers.authorization.split(' ')[1]);
+    //console.log(pid);
+    //if (pid < 0) {
+      //  res.sendStatus(403);
+        //return;
+    //}
+    const exercise = req.query.exercise
+    const character = req.query.character
+    const query = `SELECT Path FROM Avatar WHERE Exercise = $1 AND Character = $2`;
+    pool.query(query, [exercise, character],(err,result)=>{
+        if (result.rows.length === 0) {
+            res.sendStatus(404)
+            return;
+        }
+        ex  = result.rows[0].path
+        try {
+            axios.get(ex, { responseType: 'arraybuffer' })
+            .then((response)=>response.data).then(data=>{
+                res.setHeader('Content-Type', 'model/gltf+json');
+                res.setHeader('Content-Disposition', 'attachment; filename=file.gltf');
+                res.send(data);
+                return
+            });
+            
+          } catch (err) {
+            console.error(err);
+            res.status(500).send('Internal Server Error');
+            return
+          }
+        
 
+    });
+    
+
+})
 // router.get('/avatar-for-exe', (req, res) => {
 //     const pid = ver_tools.login_ver(req.headers.authorization.split(' ')[1]);
 //     console.log(pid);
