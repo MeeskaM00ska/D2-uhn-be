@@ -7,29 +7,29 @@ app.use(bodyParser.json())
 app.set("view engine", 'ejs')
 const port = process.env.PORT || 5000;
 
-const table_init = require('./table_setup');
-table_init.table_init();
-
-// const meetingRouter = require('./routes/meeting')
-// app.use("/meeting", meetingRouter)
-const cors = require('cors')
-app.use(cors({
-  origin: "*"
-}))
-const accountRouter = require('./routes/account')
-app.use("/account", accountRouter)
-const authRouter = require('./routes/send_auth')
-app.use("/auth", authRouter)
-const blogRouter = require("./routes/blog")
-app.use("/blog", blogRouter)
-const exeRouter = require("./routes/exercise")
-app.use("/exercise", exeRouter)
-const recordRouter = require("./routes/recordings")
-app.use("/record", recordRouter)
-const calendarRouter = require("./routes/calendar")
-app.use("/calendar", calendarRouter)
-const popRouter = require('./routes/pop_up')
-app.use("/", popRouter)
+// const table_init = require('./table_setup');
+// table_init.table_init();
+//
+// // const meetingRouter = require('./routes/meeting')
+// // app.use("/meeting", meetingRouter)
+// const cors = require('cors')
+// app.use(cors({
+//   origin: "*"
+// }))
+// const accountRouter = require('./routes/account')
+// app.use("/account", accountRouter)
+// const authRouter = require('./routes/send_auth')
+// app.use("/auth", authRouter)
+// const blogRouter = require("./routes/blog")
+// app.use("/blog", blogRouter)
+// const exeRouter = require("./routes/exercise")
+// app.use("/exercise", exeRouter)
+// const recordRouter = require("./routes/recordings")
+// app.use("/record", recordRouter)
+// const calendarRouter = require("./routes/calendar")
+// app.use("/calendar", calendarRouter)
+// const popRouter = require('./routes/pop_up')
+// app.use("/", popRouter)
 
 
 app.get('/hello', (req, res) => {
