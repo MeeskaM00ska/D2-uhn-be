@@ -12,7 +12,10 @@ table_init.table_init();
 
 // const meetingRouter = require('./routes/meeting')
 // app.use("/meeting", meetingRouter)
-const cors = require('cors')
+const cors = require('cors');
+
+app.use(express.static('client'))
+
 app.use(cors({
   origin: "*"
 }))
