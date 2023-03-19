@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
 const server = require('http').Server(app)
+const path = require("path");
 // const io = require('socket.io')(server)
 app.use(bodyParser.json())
 app.set("view engine", 'ejs')
@@ -34,7 +35,9 @@ app.use("/calendar", calendarRouter)
 const popRouter = require('./routes/pop_up')
 app.use("/", popRouter)
 
-
+app.use(function(req, res) {
+  res.sendFile(path.resolve(__dirname, './client/index.html'))
+})
 
 server.listen(port,  () => {
   console.log(`Server listening at http://localhost:${port}`);
